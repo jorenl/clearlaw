@@ -6,15 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=KoHo|Montserrat" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="static/splash.css" />
+    <script src="static/splash.js"></script>
 </head>
 <body>
-    <div class=screenbox>
+    <div class=screenbox id=splash-box>
         <div class=splash>
             <div class=logo>
                 <div class=icon></div>
                 clearlaw<span class=accent>.org</span>
             </div>
             <div class=tagline>Leveraging technology for justice.</div>
+        </div>
+        <div id=btn-get-started class=button>Get Started</div>
+    </div>
+    <div class=screenbox id=submit-box>
+        <div id=page-container>
+            <div id=page class="empty">
+                <img src="#" id=file-preview>
+            </div>
+        </div>
+        <div class=button>
+            Choose or take a picture of a document
+            <input type="file" accept="image/*" capture="environment" id=file-input>
         </div>
     </div>
 </body>
