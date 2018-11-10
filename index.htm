@@ -25,9 +25,16 @@
                 <img src="#" id=file-preview>
             </div>
         </div>
-        <div class=button>
-            Choose or take a picture of a document
-            <input type="file" accept="image/*" capture="environment" id=file-input>
+        <div id=button-wrapper>
+            <form id=upload-form action="/upload" method="POST" enctype="multipart/form-data">
+                <div class=button id=btn-select-file>
+                    Choose or take a picture of a document
+                    <input type="file" accept="image/*" capture="environment" id=file-input name=documentImage>
+                </div>
+                <button type="submit" class=button id=btn-upload>
+                    Upload
+                </button>
+            </form>
         </div>
     </div>
 </body>

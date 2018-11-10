@@ -72,7 +72,7 @@ html, body {
     position: relative;
 }
 
-#splash-box .button, #submit-box .button {
+#splash-box .button, #submit-box #button-wrapper {
     position: absolute;
     bottom: 20px;
     left: 20px;
@@ -107,10 +107,22 @@ html, body {
 #page.empty {
     border: dashed 5px white;
 }
+#page.empty img {
+    display: none;
+}
 #page.submitted {
     border: solid 5px white;
 }
 
 #page img {
     height: 100%;
+}
+
+#button-wrapper .button {
+    margin-top: 20px;
+}
+
+#btn-upload {
+    background-color: #5F5087;
+    color: white;
 }

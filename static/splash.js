@@ -8,15 +8,30 @@ window.onload = function() {
 
     var btn_get_started = document.getElementById('btn-get-started');
     
-    var box_submit = document.getElementById('submit-box');
-
+    var el_btn_upload = document.getElementById('btn-upload');
+    var el_upload_form = document.getElementById('upload-form');
+    
+    var el_box_splash = document.getElementById('splash-box');
+    var el_box_submit = document.getElementById('submit-box');
 
     btn_get_started.addEventListener('click', (event) => {
-        box_submit.scrollIntoView({behavior: 'smooth'});
-    })
+        el_box_submit.scrollIntoView({behavior: 'smooth'});
+    });
     el_file_input.addEventListener('change', (event) => {
         el_file_preview.src = URL.createObjectURL(el_file_input.files[0]);
         el_page.classList.remove('empty');
         el_page.classList.add('submitted');
+    });
+
+    el_upload_form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        var data = new FormData(el_upload_form);
+        var request = new XMLHttpRequest()
+        
+        request.onreadystatechange = function(){};
+        
+        request.open(el_upload_form.method, el_upload_form.action);
+        request.send(data);
     });
 };
