@@ -80,7 +80,7 @@ html, body {
     cursor: pointer;
 }
 
-.button input[type=file] {
+.button input[type=file], .button button {
     width: 100%;
     height: 100%;
     display: block;
@@ -112,6 +112,7 @@ html, body {
 }
 #page.submitted {
     border: solid 5px white;
+    background-color: white;
 }
 
 #page img {
@@ -125,4 +126,5 @@ html, body {
 #btn-upload {
     background-color: #5F5087;
     color: white;
+    border: none;
 }
