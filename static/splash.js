@@ -27,9 +27,14 @@ window.onload = function() {
         event.preventDefault();
 
         var data = new FormData(el_upload_form);
-        var request = new XMLHttpRequest()
-        
-        request.onreadystatechange = function(){};
+        var request = new XMLHttpRequest();
+        request.responseType = 'json';
+        request.onreadystatechange = function() {
+            if (request.readyState === 4 && request.status === 200) {
+                console.log(request.response);
+                window.location = '/document/'+request.response.documentId;
+            }
+        };
         
         request.open(el_upload_form.method, el_upload_form.action);
         request.send(data);

@@ -2,10 +2,16 @@ var path = require('path');
 
 var express = require('express');
 var multer = require('multer');
+
+var tesseract = require('node-tesseract');
+
 // var bodyparser = require('body-parser');
 
 var app = express();
-var upload = multer({ dest: 'uploads/' })
+var upload = multer({ dest: 'uploads/' });
+
+
+var db = require('./db');
 
 //config
 
@@ -25,9 +31,45 @@ app.post('/upload',
     upload.single('documentImage'),
     (req, res) => {
         console.log('received file'+req.file);
-        res.sendStatus(200);
+        if (req.file) {
+            var doc = new db.Document();
+            doc.imageFiles.push(req.file)
+
+            res.send({
+                documentId: doc.id
+            });
+
+            tesseract.process('uploads/'+req.file, {}, (error, text) => {
+                if (error) {
+                    doc.status = 2;
+                } else {
+                    doc.textData.push(text);
+                    doc.status = 1;
+                }
+            });
+        } else {
+            res.sendStatus(404);
+        }
     }
 );
+
+app.get('/document/:documentid', (req, res) => {
+    res.sendFile('document.htm', {root: './'})
+});
+app.get('/document/:documentId/status', (req, res) => {
+    var doc = db.documents[req.params.documentId];
+    if (doc) {
+        text = null;
+        if (doc.status==1) {
+            text = doc.textData[0];
+        }
+        res.send({
+            status: doc.status,
+        });
+    } else {
+        res.sendStatus(404);
+    }
+});
 
 app.listen(port, () => {
     console.log('Express app listening on port '+port);
