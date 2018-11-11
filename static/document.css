@@ -8,9 +8,12 @@
     white-space: pre-wrap;
     padding: 20px;
 }
+#analysis-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-gap: 10px;
+}
 #analysis-box > div {
-    width: 50%;
-    height: 50%;
-    float: left;
+    height: 50vh;
     position: relative;
 }

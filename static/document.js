@@ -38,6 +38,7 @@ function createCharts() {
                 }]
             },
             options: {
+                maintainAspectRatio: false,
                 legend: {
                     display: false,
                 },
