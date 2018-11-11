@@ -2,9 +2,9 @@ var loans = [
 		{ 	
 		"source":"checkLoan", 
 		"url":"n/a", 
-		"interest":7, 
-		"term":5, 
-		"totalAmount":29.70, 
+		"interest":5, 
+		"term":7, 
+		"totalAmount":39.70, 
 		"predScore":8
 	},
 	{
@@ -12,7 +12,7 @@ var loans = [
 		"url": "https://studentaid.ed.gov/sa/types/loans/interest-rates", 
 		"interest":5.05, 
 		"term":5, 
-		"totalAmount":28.7, 
+		"totalAmount":38.7, 
 		"predScore":3
 	},
 	{
@@ -20,7 +20,7 @@ var loans = [
 		"url":"https://www.suntrust.com/loans/student-loans", 
 		"interest":6, 
 		"term":12, 
-		"totalAmount":35, 
+		"totalAmount":45, 
 		"predScore":4
 	},
 	{ 
@@ -28,7 +28,7 @@ var loans = [
 	 	"url":"http://discover.com/student-loans/undergraduate.html",
 	 	"interest":11, 
 	 	"term":5, 
-	 	"totalAmount":32.61, 
+	 	"totalAmount":42.61, 
 	 	"predScore":6
 	},
 	{ 
@@ -36,7 +36,7 @@ var loans = [
 		"url":"https://www.salliemae.com/student-loans/",
 		"interest":8.05,
 		"term":9,
-		"totalAmount":35.15,
+		"totalAmount":45.15,
 		"predScore":8
 	}
 
