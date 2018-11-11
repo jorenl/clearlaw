@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "UTF-8">
+        <style type="text/css">
+            #charts-wrapper {
+                position: relative;
+                width: 900px;
+                max-width: 100%;
+                height: 500px;
+                }
+            #charts-wrapper > div {
+                width: 50%;
+                height: 50%;
+                float: left;
+                position: relative;
+            }
+
+        </style>
+        <script src="loanterms-data.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+    </head>
+    <body>
+
+    <div id="charts-wrapper"></div>
+
+       <script>
+
+            var sources = [];
+            var data = {
+                Intrest: [],
+                Duration: [],
+                Total_Payment: [],
+                PredScore: []
+            }
+            
+
+            loans.forEach( (loandata) => {
+                data["Intrest"].push(loandata.interest);
+                data["Duration"].push(loandata.term);
+                data["Total_Payment"].push(loandata.totalAmount);
+                data["PredScore"].push(loandata.predScore);
+                sources.push(loandata.source)
+            });
+
+            Object.keys(data).forEach((key) => {
+                var div = document.createElement("div");
+                var canvas = document.createElement("canvas");
+                var ctx = canvas.getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: sources,
+                        datasets: [{
+                            data: data[key],
+                            backgroundColor: [
+                                'rgba( 34, 139,34,1)', 
+                                'rgba(218,179,240,1)',
+                                'rgba( 44, 11, 62,1)',
+                                'rgba(139, 92,165,1)',
+                                'rgba(  7,  0, 10,1)'
+                            ]
+                        }]
+                    },
+                    options: {
+                       legend: {
+                            display: false,
+                        },
+                         title: {
+                            display: true,
+                            text: key
+                        },
+                        scales: {
+                            xAxes: [{
+                                ticks: {
+                                    autoSkip: false
+                                }
+                            }],
+
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                            
+
+            
+                        }
+                    }
+                });
+                div.appendChild(canvas);
+                document.getElementById("charts-wrapper").appendChild(div);
+            });
+
+
+
+           
+        //     var ctx = document.getElementById("myChart2").getContext('2d');
+        //     var myChart2 = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: ["Blue", "Yellow", "Green", "Purple", "Orange"],
+        //         datasets: [{
+        //             label: '# of Votes',
+        //             data: [12, 19, 3, 5, 2, 3],
+        //             backgroundColor: [
+        //                 'rgba(54, 162, 235, 0.2)',
+        //                 'rgba(255, 206, 86, 0.2)',
+        //                 'rgba(75, 192, 192, 0.2)',
+        //                 'rgba(153, 102, 255, 0.2)',
+        //                 'rgba(255, 159, 64, 0.2)'
+        //             ],
+        //             borderColor: [
+        //                 'rgba(54, 162, 235, 1)',
+        //                 'rgba(255, 206, 86, 1)',
+        //                 'rgba(75, 192, 192, 1)',
+        //                 'rgba(153, 102, 255, 1)',
+        //                 'rgba(255, 159, 64, 1)'
+        //             ],
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //     options: {
+        //         legend: {
+        //             display: false,
+        //         },
+        //         title: {
+        //             display: true,
+        //             text: 'Duration'
+        //         },
+        //         scales: {
+        //             yAxes: [{
+        //                 ticks: {
+        //                     beginAtZero:true
+        //                 }
+        //             }]
+        //         }
+        //     }
+        // });
+        //     var ctx = document.getElementById("myChart3").getContext('2d');
+        //     var myChart3 = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: ["Blue", "Yellow", "Green", "Purple", "Orange"],
+        //         datasets: [{
+        //             label: '# of Votes',
+        //             data: [12, 19, 3, 5, 2, 3],
+        //             backgroundColor: [
+        //                 'rgba(54, 162, 235, 0.2)',
+        //                 'rgba(255, 206, 86, 0.2)',
+        //                 'rgba(75, 192, 192, 0.2)',
+        //                 'rgba(153, 102, 255, 0.2)',
+        //                 'rgba(255, 159, 64, 0.2)'
+        //             ],
+        //             borderColor: [
+        //                 'rgba(54, 162, 235, 1)',
+        //                 'rgba(255, 206, 86, 1)',
+        //                 'rgba(75, 192, 192, 1)',
+        //                 'rgba(153, 102, 255, 1)',
+        //                 'rgba(255, 159, 64, 1)'
+        //             ],
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //     options: {
+        //         legend: {
+        //             display: false,
+        //         },
+        //         title: {
+        //             display: true,
+        //             text: 'How much you really pay'
+        //         },
+        //         scales: {
+        //             yAxes: [{
+        //                 ticks: {
+        //                     beginAtZero:true
+        //                 }
+        //             }]
+        //         }
+        //     }
+        // });
+        //     var ctx = document.getElementById("myChart4").getContext('2d');
+        //     var myChart4 = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: ["Blue", "Yellow", "Green", "Purple", "Orange"],
+        //         datasets: [{
+        //             label: '# of Votes',
+        //             data: [12, 19, 3, 5, 2, 3],
+        //             backgroundColor: [
+        //                 'rgba(54, 162, 235, 0.2)',
+        //                 'rgba(255, 206, 86, 0.2)',
+        //                 'rgba(75, 192, 192, 0.2)',
+        //                 'rgba(153, 102, 255, 0.2)',
+        //                 'rgba(255, 159, 64, 0.2)'
+        //             ],
+        //             borderColor: [
+        //                 'rgba(54, 162, 235, 1)',
+        //                 'rgba(255, 206, 86, 1)',
+        //                 'rgba(75, 192, 192, 1)',
+        //                 'rgba(153, 102, 255, 1)',
+        //                 'rgba(255, 159, 64, 1)'
+        //             ],
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //     options: {
+        //         legend: {
+        //             display: false,
+        //         },
+        //         title: {
+        //             display: true,
+        //             text: 'Our Loan Score'
+        //         },
+        //         scales: {
+        //             yAxes: [{
+        //                 ticks: {
+        //                     beginAtZero:true
+        //                 }
+        //             }]
+        //         }
+        //     }
+        // });
+</script>
+    </body>
+</html>
+
