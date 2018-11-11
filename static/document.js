@@ -11,7 +11,7 @@ window.onload = function() {
         fetch('/document/'+documentId+'/status', (res) => {
             console.log(res);
             if (res.status==1) {
-                el_doc_box.appendChild( document.createTextNode( res.status.text ));
+                el_doc_box.appendChild( document.createTextNode( res.text ));
                 el_doc_box.scrollIntoView({behavior: 'smooth'});
             } else {
                 window.setTimeout( tryStatus, 1000);
