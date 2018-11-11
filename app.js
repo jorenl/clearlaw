@@ -80,7 +80,7 @@ app.get('/document/:documentId/status', (req, res) => {
         res.send({
             status: doc.status,
             text: text,
-            analysis: document.analysis
+            analysis: doc.analysis
         });
     } else {
         res.sendStatus(404);
