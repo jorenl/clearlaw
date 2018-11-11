@@ -30,16 +30,18 @@ app.get('/', (req, res) => {
 app.post('/upload', 
     upload.single('documentImage'),
     (req, res) => {
-        console.log('received file'+req.file);
         if (req.file) {
+            var filename = req.file.destination + req.file.filename;
+            console.log('received file '+filename);
+
             var doc = new db.Document();
-            doc.imageFiles.push(req.file)
+            doc.imageFiles.push(filename);
 
             res.send({
                 documentId: doc.id
             });
 
-            tesseract.process('uploads/'+req.file, {}, (error, text) => {
+            tesseract.process('uploads/'+filename, {}, (error, text) => {
                 if (error) {
                     doc.status = 2;
                 } else {
