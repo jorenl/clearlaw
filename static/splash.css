@@ -128,3 +128,7 @@ html, body {
     color: white;
     border: none;
 }
+
+#doc-box {
+    background-color: white;
+}

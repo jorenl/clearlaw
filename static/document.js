@@ -1,12 +1,24 @@
 var documentId = window.location.href.match(/\/document\/([0-9]+)/)[1];
 
-function tryStatus() {
-    console.log('fetch...');
-    fetch('/document/'+documentId+'/status', (res) => {
-        console.log(res);
-    });
-}
+
 
 window.onload = function() {
-    setInterval(()=>{ tryStatus();}, 1000);
+    var el_doc_box = document.getElementById('doc-box');
+
+    function tryStatus() {
+        console.log('fetch...');
+        document.querySelector('.tagline').innerHTML += '.';
+        fetch('/document/'+documentId+'/status', (res) => {
+            console.log(res);
+            if (res.status==1) {
+                el_doc_box.appendChild( document.createTextNode( res.status.text ));
+                el_doc_box.scrollIntoView({behavior: 'smooth'});
+            } else {
+                window.setTimeout( tryStatus, 1000);
+            }
+        });
+    }
+
+
+    tryStatus();
 }
