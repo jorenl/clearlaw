@@ -8,7 +8,7 @@ window.onload = function() {
     function tryStatus() {
         console.log('fetch...');
         document.querySelector('.tagline').innerHTML += '.';
-        fetch('/document/'+documentId+'/status').then((res) => {
+        fetch('/document/'+documentId+'/status').then(res => res.json()).then((res) => {
             console.log(res);
             if (res.status==1) {
                 el_doc_box.appendChild( document.createTextNode( res.text ));
