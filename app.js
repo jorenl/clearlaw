@@ -41,8 +41,9 @@ app.post('/upload',
                 documentId: doc.id
             });
 
-            tesseract.process('uploads/'+filename, {}, (error, text) => {
+            tesseract.process(filename, {}, (error, text) => {
                 if (error) {
+                    console.log('ERROR', error);
                     doc.status = 2;
                 } else {
                     doc.textData.push(text);
