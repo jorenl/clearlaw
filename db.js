@@ -8,6 +8,7 @@ class Document {
         this.status = 0; //0: not ready, 1: ready
         this.imageFiles = [];
         this.textData = [];
+        this.analysis = {};
 
         documents.push(this);
     }

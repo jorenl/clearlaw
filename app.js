@@ -1,5 +1,7 @@
 var path = require('path');
 
+var fs = require('fs');
+
 var express = require('express');
 var multer = require('multer');
 
@@ -12,11 +14,16 @@ var upload = multer({ dest: 'uploads/' });
 
 
 var db = require('./db');
+var analysis = require('./analysis');
 
 //config
 
 var port = process.env.port || 80;
 var application_root = './'
+
+
+var canned_OCR_data = fs.readFileSync('canned_OCR_data.txt', "utf8");
+
 
 // define static directory
 app.use('/static', express.static('static'));
@@ -45,10 +52,14 @@ app.post('/upload',
                 if (error) {
                     console.log('ERROR', error);
                     doc.status = 2;
+                    // HACKKKK
+                    doc.status = 1;
+                    doc.textData.push(canned_OCR_data);
                 } else {
                     doc.textData.push(text);
                     doc.status = 1;
                 }
+                analysis.analyze_document(doc);
             });
         } else {
             res.sendStatus(404);
@@ -68,7 +79,8 @@ app.get('/document/:documentId/status', (req, res) => {
         }
         res.send({
             status: doc.status,
-            text: text
+            text: text,
+            analysis: document.analysis
         });
     } else {
         res.sendStatus(404);
