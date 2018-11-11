@@ -68,6 +68,7 @@ app.get('/document/:documentId/status', (req, res) => {
         }
         res.send({
             status: doc.status,
+            text: text
         });
     } else {
         res.sendStatus(404);
